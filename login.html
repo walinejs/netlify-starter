@@ -1,173 +1,150 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-  content="width=device-width, initial-scale=1">     
-    <title>Racket Insight Admin — Login</title>      
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <style>
-      :root { color-scheme: light dark; }
-      body {
-        font-family: -apple-system,
-  BlinkMacSystemFont, "Segoe UI", sans-serif;        
-        background: #f5f6f8;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-        color: #1a1a2e;
-      }
-      .card {
-        background: #fff;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);     
-        width: 100%;
-        max-width: 380px;
-      }
-      h1 { margin: 0 0 1.5rem; font-size: 1.25rem; } 
-      label { display: block; margin: 0 0 0.25rem;   
-  font-size: 0.875rem; font-weight: 600; }
-      input[type=email], input[type=password] {      
-        width: 100%;
-        padding: 0.625rem;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        font-size: 1rem;
-        box-sizing: border-box;
-        margin-bottom: 1rem;
-      }
-      button {
-        width: 100%;
-        padding: 0.75rem;
-        background: #002785;
-        color: #fff;
-        border: 0;
-        border-radius: 6px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        margin-top: 1rem;
-      }
-      button:disabled { opacity: 0.5; cursor:        
-  not-allowed; }
-      .turnstile-wrap { margin: 1rem 0; display:     
-  flex; justify-content: center; }
-      .error {
-        background: #fee;
-        color: #c00;
-        padding: 0.75rem;
-        border-radius: 6px;
-        font-size: 0.875rem;
-        margin-top: 1rem;
-        display: none;
-      }
-      .hint { font-size: 0.75rem; color: #6b7280;    
-  margin-top: 1rem; text-align: center; }
-    </style>
-  </head>
-  <body>
-    <form class="card" id="login-form"
-  autocomplete="on">
-      <h1>Comment Admin — Login</h1>
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email"    
-  required autocomplete="email">
-      <label for="password">Password</label>
-      <input id="password" name="password"
-  type="password" required
-  autocomplete="current-password">
-      <div class="turnstile-wrap">
-        <div class="cf-turnstile"
-             data-sitekey="0x4AAAAAAC_tM5nqz_h2t9dj" 
-             data-callback="onTurnstileSuccess"      
-             data-error-callback="onTurnstileError"  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Racket Insight Admin Login</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f6f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #1a1a2e;
+    }
+    .card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 380px;
+    }
+    h1 { margin: 0 0 1.5rem; font-size: 1.25rem; }
+    label { display: block; margin: 0 0 0.25rem; font-size: 0.875rem; font-weight: 600; }
+    input[type=email], input[type=password] {
+      width: 100%;
+      padding: 0.625rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      margin-bottom: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #002785;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .turnstile-wrap { margin: 1rem 0; display: flex; justify-content: center; }
+    .error {
+      background: #fee;
+      color: #c00;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      display: none;
+    }
+    .hint { font-size: 0.75rem; color: #6b7280; margin-top: 1rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <form class="card" id="login-form" autocomplete="on">
+    <h1>Comment Admin Login</h1>
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required autocomplete="email">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required autocomplete="current-password">
+    <div class="turnstile-wrap">
+      <div class="cf-turnstile"
+           data-sitekey="0x4AAAAAAC_tM5nqz_h2t9dj"
+           data-callback="onTurnstileSuccess"
+           data-error-callback="onTurnstileError"
+           data-expired-callback="onTurnstileExpired"></div>
+    </div>
+    <button id="submit" type="submit" disabled>Login</button>
+    <div class="error" id="error"></div>
+    <p class="hint">Admin-only. Comment submissions on the main site have their own widget.</p>
+  </form>
 
-  data-expired-callback="onTurnstileExpired"></div>  
-      </div>
-      <button id="submit" type="submit"
-  disabled>Login</button>
-      <div class="error" id="error"></div>
-      <p class="hint">Admin-only. Comment submissions
-   on the main site have their own widget.</p>       
-    </form>
+  <script>
+    var turnstileToken = null;
+    var submitBtn = document.getElementById('submit');
+    var errorEl = document.getElementById('error');
 
-    <script>
-      let turnstileToken = null;
-      const submitBtn =
-  document.getElementById('submit');
-      const errorEl =
-  document.getElementById('error');
+    window.onTurnstileSuccess = function (token) {
+      turnstileToken = token;
+      submitBtn.disabled = false;
+    };
+    window.onTurnstileError = function () {
+      turnstileToken = null;
+      submitBtn.disabled = true;
+      showError('Challenge failed. Refresh and try again.');
+    };
+    window.onTurnstileExpired = function () {
+      turnstileToken = null;
+      submitBtn.disabled = true;
+    };
 
-      window.onTurnstileSuccess = function (token) { 
-        turnstileToken = token;
-        submitBtn.disabled = false;
-      };
-      window.onTurnstileError = function () {        
-        turnstileToken = null;
-        submitBtn.disabled = true;
-        showError('Challenge failed. Refresh and try 
-  again.');
-      };
-      window.onTurnstileExpired = function () {      
-        turnstileToken = null;
-        submitBtn.disabled = true;
-      };
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.style.display = 'block';
+    }
+    function clearError() {
+      errorEl.style.display = 'none';
+    }
 
-      function showError(msg) {
-        errorEl.textContent = msg;
-        errorEl.style.display = 'block';
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearError();
+      if (!turnstileToken) {
+        showError('Please complete the Turnstile challenge.');
+        return;
       }
-      function clearError() {
-        errorEl.style.display = 'none';
-      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Signing in...';
 
-      document.getElementById('login-form').addEventL
-  istener('submit', async (e) => {
-        e.preventDefault();
-        clearError();
-        if (!turnstileToken) {
-          showError('Please complete the Turnstile   
-  challenge.');
-          return;
-        }
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Signing in...';     
-
-        try {
-          const res = await fetch('/api/token', {    
-            method: 'POST',
-            headers: { 'Content-Type':
-  'application/json' },
-            body: JSON.stringify({
-              email:
-  document.getElementById('email').value.trim(),     
-              password:
-  document.getElementById('password').value,
-              turnstile: turnstileToken,
-            }),
-          });
-          const body = await res.json();
-          if (body.errno !== 0) {
-            showError(body.errmsg || 'Login
-  failed.');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Login';
-            if (window.turnstile)
-  window.turnstile.reset();
-            return;
-          }
-          sessionStorage.setItem('TOKEN',
-  body.data.token);
-          window.location.href = '/ui/';
-        } catch (err) {
-          showError('Network error: ' + err.message);
+      fetch('/api/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: document.getElementById('email').value.trim(),
+          password: document.getElementById('password').value,
+          turnstile: turnstileToken
+        })
+      })
+      .then(function (res) { return res.json(); })
+      .then(function (body) {
+        if (body.errno !== 0) {
+          showError(body.errmsg || 'Login failed.');
           submitBtn.disabled = false;
           submitBtn.textContent = 'Login';
+          if (window.turnstile) window.turnstile.reset();
+          return;
         }
+        sessionStorage.setItem('TOKEN', body.data.token);
+        window.location.href = '/ui/';
+      })
+      .catch(function (err) {
+        showError('Network error: ' + err.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Login';
       });
-    </script>
-  </body>
-  </html>
+    });
+  </script>
+</body>
+</html>
