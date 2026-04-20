@@ -1,2 +1,12 @@
-/ui/*   /ui/index.html                         200
-/*      /.netlify/functions/comment/:splat     200
+/ui/*              /ui/index.html                                      200
+/api/*             /.netlify/functions/comment/api/:splat              200
+/comment           /.netlify/functions/comment/api/comment             200
+/comment/*         /.netlify/functions/comment/api/comment/:splat      200
+/user              /.netlify/functions/comment/api/user                200
+/user/*            /.netlify/functions/comment/api/user/:splat         200
+/token             /.netlify/functions/comment/api/token               200
+/token/*           /.netlify/functions/comment/api/token/:splat        200
+/article           /.netlify/functions/comment/api/article             200
+/article/*         /.netlify/functions/comment/api/article/:splat      200
+/verification      /.netlify/functions/comment/api/verification        200
+/*                 /.netlify/functions/comment/:splat                  200
